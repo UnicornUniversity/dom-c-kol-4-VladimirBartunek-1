@@ -111,7 +111,7 @@ export function getEmployeeStatistics(employees) {
   const minAge = Math.floor(Math.min(...ages));
   const maxAge = Math.floor(Math.max(...ages));
 
-  const medianAge = getMedian(ages);
+  const medianAge = Math.floor(getMedian(ages));
 
   const workloads = employees.map(e => e.workload);
   const medianWorkload = getMedian(workloads);

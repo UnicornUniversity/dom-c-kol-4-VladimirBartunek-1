@@ -108,8 +108,8 @@ export function getEmployeeStatistics(employees) {
     ages.reduce((sum, a) => sum + a, 0) / total
   );
 
-  const minAge = Math.min(...ages);
-  const maxAge = Math.max(...ages);
+  const minAge = Math.floor(Math.min(...ages));
+  const maxAge = Math.floor(Math.max(...ages));
 
   const medianAge = getMedian(ages);
 

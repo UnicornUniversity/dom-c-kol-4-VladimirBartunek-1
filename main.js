@@ -35,8 +35,11 @@ const GENDERS = ["male", "female"];
 // ----------------------------------------
 
 /**
- * @param {Object} dtoIn
- * @returns {Object} dtoOut
+ * Main entry point of the application.
+ * Generates employee data and computes statistics.
+ *
+ * @param {object} dtoIn - Input data containing count and age range
+ * @returns {object} dtoOut - Computed statistics about employees
  */
 export function main(dtoIn) {
   const employees = generateEmployeeData(dtoIn);
@@ -47,7 +50,12 @@ export function main(dtoIn) {
 // ----------------------------------------
 // GENERATE EMPLOYEES
 // ----------------------------------------
-
+/**
+ * Generates a list of employees based on input.
+ *
+ * @param {object} dtoIn - Input data with count and age range
+ * @returns {Array<object>} List of generated employees
+ */
 function generateEmployeeData(dtoIn) {
   const result = [];
   const usedBirthdates = new Set();
@@ -81,7 +89,12 @@ function generateEmployeeData(dtoIn) {
 // ----------------------------------------
 // STATISTICS
 // ----------------------------------------
-
+/**
+ * Computes statistics from employee list.
+ *
+ * @param {Array<object>} employees - List of employees
+ * @returns {object} Calculated statistics
+ */
 function getEmployeeStatistics(employees) {
 
   const total = employees.length;
@@ -135,11 +148,21 @@ function getEmployeeStatistics(employees) {
 // ----------------------------------------
 // HELPERS
 // ----------------------------------------
-
+/**
+ * Returns a random element from array.
+ *
+ * @param {Array} arr - Input array
+ * @returns {*} Random element
+ */
 function getRandom(arr) {
   return arr[Math.floor(Math.random() * arr.length)];
 }
-
+/**
+ * Returns name and surname based on gender.
+ *
+ * @param {string} gender - "male" or "female"
+ * @returns {{name: string, surname: string}} Person identity
+ */
 function getPersonIdentity(gender) {
   if (gender === "male") {
     return {
@@ -153,7 +176,13 @@ function getPersonIdentity(gender) {
     surname: getRandom(FEMALE_SURNAMES),
   };
 }
-
+/**
+ * Generates random birthdate based on age range.
+ *
+ * @param {number} minAge - Minimum age
+ * @param {number} maxAge - Maximum age
+ * @returns {string} Birthdate in ISO format
+ */
 function generateBirthdate(minAge, maxAge) {
   const MS_PER_DAY = 24 * 60 * 60 * 1000;
   const DAYS_PER_YEAR = 365.25;
@@ -181,7 +210,12 @@ function generateBirthdate(minAge, maxAge) {
 
   return birthdate.toISOString();
 }
-
+/**
+ * Calculates age from birthdate.
+ *
+ * @param {string} birthdate - ISO date string
+ * @returns {number} Age in years
+ */
 function getAge(birthdate) {
   const today = new Date();
   const birth = new Date(birthdate);
@@ -195,7 +229,12 @@ function getAge(birthdate) {
 
   return age;
 }
-
+/**
+ * Calculates median of numeric array.
+ *
+ * @param {number[]} arr - Array of numbers
+ * @returns {number} Median value
+ */
 function getMedian(arr) {
   const sorted = [...arr].sort((a, b) => a - b);
   const mid = Math.floor(sorted.length / 2);
@@ -206,7 +245,12 @@ function getMedian(arr) {
 
   return sorted[mid];
 }
-
+/**
+ * Rounds number to 1 decimal place.
+ *
+ * @param {number} num - Input number
+ * @returns {number} Rounded number
+ */
 function round1(num) {
   return Math.round(num * 10) / 10;
 }

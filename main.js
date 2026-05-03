@@ -37,7 +37,6 @@ const GENDERS = ["male", "female"];
 /**
  * Main entry point of the application.
  * Generates employee data and computes statistics.
- *
  * @param {object} dtoIn - Input data containing count and age range
  * @returns {object} dtoOut - Computed statistics about employees
  */
@@ -52,11 +51,10 @@ export function main(dtoIn) {
 // ----------------------------------------
 /**
  * Generates a list of employees based on input.
- *
  * @param {object} dtoIn - Input data with count and age range
  * @returns {Array<object>} List of generated employees
  */
-function generateEmployeeData(dtoIn) {
+export function generateEmployeeData(dtoIn) {
   const result = [];
   const usedBirthdates = new Set();
 
@@ -95,7 +93,7 @@ function generateEmployeeData(dtoIn) {
  * @param {Array<object>} employees - List of employees
  * @returns {object} Calculated statistics
  */
-function getEmployeeStatistics(employees) {
+export function getEmployeeStatistics(employees) {
 
   const total = employees.length;
 
@@ -220,12 +218,8 @@ function getAge(birthdate) {
   const today = new Date();
   const birth = new Date(birthdate);
 
-  let age = today.getFullYear() - birth.getFullYear();
-
-  const m = today.getMonth() - birth.getMonth();
-  if (m < 0 || (m === 0 && today.getDate() < birth.getDate())) {
-    age--;
-  }
+  const diffMs = today - birth;
+  const age = diffMs / (1000 * 60 * 60 * 24 * 365.25);
 
   return age;
 }
